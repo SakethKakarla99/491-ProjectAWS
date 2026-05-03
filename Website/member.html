@@ -283,9 +283,17 @@ document.getElementById("mediaInput").addEventListener("change", async () => {
   chatWindow.scrollTop = chatWindow.scrollHeight;
 
   try {
-    const res = await fetch("${API_URL}/chat-with-media", {
+    const res = await fetch("${API_URL}/chat", {
       method: "POST",
-      body: formData
+      headers: {
+        "Content-Type": "application/json",
+        ...(accessToken ? { Authorization: 'Bearer ${accessToken}'}: {})
+      },
+      body: JSON.stringify({
+        message:question,
+        thread_id: threadId
+
+      })
     });
 
     const data = await res.json();
