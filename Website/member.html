@@ -121,6 +121,7 @@
     const supabaseUrl = 'https://ezowjohfkxvaajeqilkx.supabase.co';
     const supabaseAnonKey = 'sb_publishable__ajmqfcEBopf6B-aKLIzuw_XmyvssUq';
     const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    const API_URL = "http://52.14.47.15:8000";
 
     const textarea = document.getElementById('chat-input');
     const sendButton = document.getElementById('send-button');
@@ -135,7 +136,7 @@
 
     async function loadConversationList() {
       if (!accessToken) return;
-      const res = await fetch('http://localhost:8000/threads', {
+      const res = await fetch('${API_URL}/threads', {
         headers: { 'Authorization': `Bearer ${accessToken}` }
       });
       const data = await res.json();
@@ -187,7 +188,7 @@
 
       // If no stored thread, ask the backend for the latest one
       if (!threadId) {
-        const res = await fetch('http://localhost:8000/threads/latest', {
+        const res = await fetch('${API_URL}/threads/latest', {
           headers: { 'Authorization': `Bearer ${accessToken}` }
         });
         const data = await res.json();
@@ -199,7 +200,7 @@
 
       if (!threadId) return;
 
-      const res = await fetch(`http://localhost:8000/history/${threadId}`, {
+      const res = await fetch(`${API_URL}/history/${threadId}`, {
         headers: { 'Authorization': `Bearer ${accessToken}` }
       });
       const data = await res.json();
@@ -282,7 +283,7 @@ document.getElementById("mediaInput").addEventListener("change", async () => {
   chatWindow.scrollTop = chatWindow.scrollHeight;
 
   try {
-    const res = await fetch("http://localhost:8000/chat-with-media", {
+    const res = await fetch("${API_URL}/chat-with-media", {
       method: "POST",
       body: formData
     });
@@ -375,7 +376,7 @@ document.getElementById("mediaInput").addEventListener("change", async () => {
       chatWindow.scrollTop = chatWindow.scrollHeight;
 
       try {
-        const res = await fetch('http://localhost:8000/chat', {
+        const res = await fetch('${API_URL}/chat', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
