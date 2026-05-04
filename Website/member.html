@@ -136,9 +136,9 @@
 
     async function loadConversationList() {
       if (!accessToken) return;
-      const res = await fetch('${API_URL}/threads', {
-        headers: { 'Authorization': `Bearer ${accessToken}` }
-      });
+        const res = await fetch(`${API_URL}/threads`, {
+          headers: { 'Authorization': `Bearer ${accessToken}` }
+        });
       const data = await res.json();
       renderConversationList(data.threads || []);
     }
@@ -188,7 +188,7 @@
 
       // If no stored thread, ask the backend for the latest one
       if (!threadId) {
-        const res = await fetch('${API_URL}/threads/latest', {
+        const res = await fetch(`${API_URL}/threads/latest`, {
           headers: { 'Authorization': `Bearer ${accessToken}` }
         });
         const data = await res.json();
@@ -283,14 +283,14 @@ document.getElementById("mediaInput").addEventListener("change", async () => {
   chatWindow.scrollTop = chatWindow.scrollHeight;
 
   try {
-    const res = await fetch("${API_URL}/chat", {
+    const res = await fetch(`${API_URL}/chat`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        ...(accessToken ? { Authorization: 'Bearer ${accessToken}'}: {})
+        ...(accessToken ? { Authorization: `Bearer ${accessToken}`}: {})
       },
       body: JSON.stringify({
-        message:question,
+        message: question,
         thread_id: threadId
 
       })
@@ -384,7 +384,7 @@ document.getElementById("mediaInput").addEventListener("change", async () => {
       chatWindow.scrollTop = chatWindow.scrollHeight;
 
       try {
-        const res = await fetch('${API_URL}/chat', {
+        const res = await fetch(`${API_URL}/chat`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
