@@ -301,7 +301,7 @@ document.getElementById("mediaInput").addEventListener("change", async () => {
         ...(accessToken ? { Authorization: `Bearer ${accessToken}`}: {})
       },
       body: JSON.stringify({
-        message: question,
+        message: `User uploaded file: ${file.name}`,
         thread_id: threadId
 
       })
